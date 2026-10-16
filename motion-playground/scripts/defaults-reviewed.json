@@ -1,7 +1,15 @@
 {
+  "before-after": {
+    "hash": "0e5ce96db8d0",
+    "file": "src/effects/hud/BeforeAfter.tsx"
+  },
   "blur-text": {
     "hash": "8f38a94332a3",
     "file": "src/effects/hud/BlurText.tsx"
+  },
+  "callout-banner": {
+    "hash": "70cf98bac363",
+    "file": "src/effects/hud/CalloutBanner.tsx"
   },
   "caption-track": {
     "hash": "3d718126ae6e",
@@ -15,6 +23,10 @@
     "hash": "6092ee834bf2",
     "file": "src/effects/hud/Checklist.tsx"
   },
+  "countdown-or-timer": {
+    "hash": "072bc8b94d5b",
+    "file": "src/effects/hud/CountdownOrTimer.tsx"
+  },
   "entity-chips": {
     "hash": "0f494f28b48e",
     "file": "src/effects/hud/EntityChips.tsx"
@@ -27,6 +39,14 @@
     "hash": "d9750400627d",
     "file": "src/effects/hud/GrowthCurve.tsx"
   },
+  "icon-grid": {
+    "hash": "57f80c49c316",
+    "file": "src/effects/hud/IconGrid.tsx"
+  },
+  "key-number-stack": {
+    "hash": "0f881dda812b",
+    "file": "src/effects/hud/KeyNumberStack.tsx"
+  },
   "odometer": {
     "hash": "c32549c9352b",
     "file": "src/effects/hud/Odometer.tsx"
@@ -34,6 +54,14 @@
   "pin-board": {
     "hash": "45d3a1cf4663",
     "file": "src/effects/hud/PinBoard.tsx"
+  },
+  "progress-steps": {
+    "hash": "1cf110655ba0",
+    "file": "src/effects/hud/ProgressSteps.tsx"
+  },
+  "pros-cons": {
+    "hash": "4289f33c68f7",
+    "file": "src/effects/hud/ProsCons.tsx"
   },
   "punch-pill": {
     "hash": "b27d1895c249",
@@ -50,6 +78,10 @@
   "ring-metric": {
     "hash": "6f3638292a4f",
     "file": "src/effects/hud/RingMetric.tsx"
+  },
+  "source-cite": {
+    "hash": "30cff2543d21",
+    "file": "src/effects/hud/SourceCite.tsx"
   },
   "stat-proof": {
     "hash": "0578b9ebba86",

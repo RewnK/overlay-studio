@@ -1,3 +1,4 @@
+
 /* 【这个文件每次更新都会被替换】你在这里改的东西,更新后不会自动保留,需要手工搬运。 */
 /* ============================================================
    HUD 特效族 · 共享地基
@@ -991,4 +992,248 @@
 .stage [data-card-theme] {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+/* ============================================================
+   新增动效卡 · 第二批次
+   ============================================================ */
+
+/* ============ CalloutBanner 横幅卡 ============ */
+.cob { }
+.cob-bar {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 14px 34px; border-radius: 14px;
+  background: var(--hud-glass);
+  border: 1px solid var(--hud-glass-brd);
+  border-left: 5px solid var(--hud-acc);
+  box-shadow: var(--hud-card-sh);
+  opacity: 0; transform: translateY(-28px);
+  transition: opacity 500ms var(--ease), transform 620ms var(--ease);
+}
+.hud.is-in .cob-bar { opacity: 1; transform: none; }
+.cob-strip {
+  width: 4px; height: 22px; border-radius: 2px;
+  background: var(--hud-acc); flex: none;
+}
+.cob-kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 17px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--hud-acc); text-transform: uppercase;
+}
+.cob-label {
+  font-size: 32px; font-weight: 800; letter-spacing: 0.02em;
+  color: var(--hud-ink); white-space: nowrap;
+}
+.hud-anchor--bottom .cob-bar { transform: translateY(28px); }
+.hud-anchor--bottom.is-in .cob-bar { transform: none; }
+
+/* ============ KeyNumberStack 数字堆叠卡 ============ */
+.kns { flex-direction: column; }
+.kns-stack { display: flex; flex-direction: column; gap: 18px; }
+.kns-row {
+  display: flex; align-items: baseline; gap: 16px;
+  opacity: 0; transform: translateX(-36px);
+  transition: opacity 520ms var(--ease), transform 620ms var(--ease);
+}
+.hud.is-in .kns-row { opacity: 1; transform: none; }
+.kns-num {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 76px; font-weight: 900; line-height: 1; letter-spacing: -0.01em;
+  color: var(--hud-ink); font-variant-numeric: tabular-nums;
+  min-width: 190px;
+}
+.kns-fix { color: var(--hud-acc); }
+.kns-suffix { font-size: 0.55em; vertical-align: 0.32em; margin-left: 2px; }
+.kns-label {
+  font-size: 24px; font-weight: 600; color: var(--hud-muted); letter-spacing: 0.04em;
+}
+
+/* ============ ProsCons 利弊卡 ============ */
+.pc { }
+.pc-grid { display: flex; gap: 34px; }
+.pc-col {
+  width: 340px; padding: 26px 28px; border-radius: 20px;
+  background: var(--hud-glass); border: 1px solid var(--hud-glass-brd);
+  box-shadow: var(--hud-card-sh);
+  opacity: 0; transform: translateX(-36px);
+  transition: opacity 520ms var(--ease), transform 620ms var(--ease);
+}
+.pc-col--con { transform: translateX(36px); }
+.hud.is-in .pc-col { opacity: 1; transform: none; }
+.pc-head {
+  font-size: 24px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--hud-acc); margin-bottom: 16px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+}
+.pc-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 26px; font-weight: 600; line-height: 1.35;
+  color: var(--hud-ink); margin-bottom: 12px;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 440ms var(--ease), transform 500ms var(--ease);
+}
+.hud.is-in .pc-item { opacity: 1; transform: none; }
+.pc-dot {
+  width: 26px; height: 26px; border-radius: 50%; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800;
+}
+.pc-col--pro .pc-dot { background: rgba(111, 208, 140, 0.18); color: var(--hud-green); }
+.pc-col--con .pc-dot { background: rgba(232, 134, 134, 0.18); color: var(--hud-alert); }
+
+/* ============ ProgressSteps 阶段进度卡 ============ */
+.pst { flex-direction: column; min-width: 640px; }
+.pst-card {
+  padding: 28px 32px; border-radius: 22px;
+  background: var(--hud-glass); border: 1px solid var(--hud-glass-brd);
+  box-shadow: var(--hud-card-sh);
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 520ms var(--ease), transform 620ms var(--ease);
+}
+.hud.is-in .pst-card { opacity: 1; transform: none; }
+.pst-title {
+  font-size: 22px; font-weight: 800; letter-spacing: 0.08em;
+  color: var(--hud-muted); margin-bottom: 18px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+}
+.pst-track {
+  position: relative; height: 46px; border-radius: 4px;
+  background: var(--hud-track);
+}
+.pst-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--hud-acc); border-radius: 4px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 900ms var(--ease);
+}
+.pst-node {
+  position: absolute; top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.pst-nnum {
+  width: 34px; height: 34px; border-radius: 50%; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--hud-node); border: 2px solid var(--hud-glass-brd);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 16px; font-weight: 700; color: var(--hud-muted);
+  transition: border-color 300ms var(--ease), color 300ms var(--ease), background 300ms var(--ease);
+}
+.pst-node.is-active .pst-nnum {
+  border-color: var(--hud-acc); color: var(--hud-acc);
+  background: color-mix(in srgb, var(--hud-acc) 14%, var(--hud-node));
+}
+.pst-nlabel {
+  font-size: 18px; font-weight: 700; color: var(--hud-ink);
+  white-space: nowrap;
+}
+
+/* ============ SourceCite 来源卡 ============ */
+.sc { }
+.sc-chip {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 26px; border-radius: 12px;
+  background: var(--hud-glass); border: 1px solid var(--hud-glass-brd);
+  border-left: 4px solid var(--hud-acc);
+  box-shadow: var(--hud-card-sh);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 480ms var(--ease), transform 560ms var(--ease);
+}
+.hud.is-in .sc-chip { opacity: 1; transform: none; }
+.sc-type {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--hud-acc); text-transform: uppercase; flex: none;
+}
+.sc-source { font-size: 26px; font-weight: 700; color: var(--hud-ink); }
+.sc-date { font-size: 20px; font-weight: 600; color: var(--hud-muted); }
+.sc-note { font-size: 18px; font-weight: 500; color: var(--hud-faint); }
+
+/* ============ IconGrid 图标网格卡 ============ */
+.ig { flex-direction: column; }
+.ig-card {
+  padding: 28px 34px; border-radius: 22px;
+  background: var(--hud-glass); border: 1px solid var(--hud-glass-brd);
+  box-shadow: var(--hud-card-sh);
+  opacity: 0; transform: translateY(18px) scale(0.98);
+  transition: opacity 520ms var(--ease), transform 600ms var(--ease);
+}
+.hud.is-in .ig-card { opacity: 1; transform: none; }
+.ig-title {
+  font-size: 24px; font-weight: 800; color: var(--hud-ink);
+  margin-bottom: 22px; letter-spacing: 0.04em;
+}
+.ig-grid { display: grid; gap: 16px; }
+.ig-grid--2 { grid-template-columns: repeat(2, 170px); }
+.ig-grid--3 { grid-template-columns: repeat(3, 150px); }
+.ig-cell {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px 14px; border-radius: 16px;
+  border: 1px solid var(--hud-glass-brd);
+  background: rgba(255, 255, 255, 0.04);
+  opacity: 0; transform: scale(0.86);
+  transition: opacity 420ms var(--ease), transform 480ms cubic-bezier(0.25, 0.9, 0.3, 1.4);
+}
+.hud.is-in .ig-cell { opacity: 1; transform: none; }
+.ig-icon { font-size: 38px; line-height: 1; }
+.ig-label { font-size: 20px; font-weight: 700; color: var(--hud-ink); text-align: center; }
+
+/* ============ CountdownOrTimer 计时卡 ============ */
+.cdt { flex-direction: column; align-items: center; }
+.cdt-card {
+  padding: 24px 46px; border-radius: 24px;
+  background: var(--hud-glass); border: 1px solid var(--hud-glass-brd);
+  border-top: 5px solid var(--hud-acc);
+  box-shadow: var(--hud-card-sh);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; transform: translateY(18px) scale(0.96);
+  transition: opacity 520ms var(--ease), transform 620ms var(--ease);
+}
+.hud.is-in .cdt-card { opacity: 1; transform: none; }
+.cdt-kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 18px; font-weight: 700; letter-spacing: 0.16em;
+  color: var(--hud-acc); text-transform: uppercase;
+}
+.cdt-num {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 110px; font-weight: 300; line-height: 1; letter-spacing: -0.02em;
+  color: var(--hud-ink); font-variant-numeric: tabular-nums;
+}
+.cdt-label { font-size: 24px; font-weight: 600; color: var(--hud-muted); }
+
+/* ============ BeforeAfter 前后对比卡 ============ */
+.ba { }
+.ba-card {
+  padding: 30px 38px; border-radius: 22px;
+  background: var(--hud-glass); border: 1px solid var(--hud-glass-brd);
+  box-shadow: var(--hud-card-sh);
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 520ms var(--ease), transform 620ms var(--ease);
+}
+.hud.is-in .ba-card { opacity: 1; transform: none; }
+.ba-row { display: flex; align-items: center; gap: 24px; }
+.ba-side {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  min-width: 160px;
+}
+.ba-tag {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--hud-muted); text-transform: uppercase;
+}
+.ba-word { font-size: 48px; font-weight: 900; color: var(--hud-ink); letter-spacing: -0.01em; }
+.ba-side--after .ba-word { color: var(--hud-acc); }
+.ba-arrow { color: var(--hud-acc); opacity: 0; transform: translateX(-12px); transition: opacity 420ms var(--ease) 200ms, transform 500ms var(--ease) 200ms; }
+.hud.is-in .ba-arrow { opacity: 1; transform: none; }
+.ba-track {
+  height: 5px; width: 100%; margin-top: 20px; border-radius: 4px;
+  background: var(--hud-track); overflow: hidden;
+}
+.ba-fill {
+  height: 100%; border-radius: 4px; background: var(--hud-acc);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 900ms var(--ease);
 }

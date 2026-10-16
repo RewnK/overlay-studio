@@ -13,6 +13,7 @@ export const GROUP_COLORS: Record<string, string> = {
   人物锚定: "#f2a35f",
   "场景 · 运镜": "#e6a54a",
   "场景 · B-roll": "#8a93a6",
+  工具: "#7a8fa6",
 };
 
 const KIND_COLOR = new Map<string, string>();

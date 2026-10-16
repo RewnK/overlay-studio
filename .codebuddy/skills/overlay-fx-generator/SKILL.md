@@ -124,7 +124,7 @@ description: 特效生成——当用户提供 SRT 字幕文件(或带时间戳�
 
 - `dimAt`(秒,时间轴绝对时间):**讲过变浅+缩小**。到点后整卡压暗并缩小(幅度见【偏好·让位与压暗】,偏好表没给就用组件默认值),同 seg 顺排的卡缩放时(zoom 参与布局,下方内容自动上移补位,不会被挤出屏幕),但不退场;整个话题结束才用 `end` 退场。`dimMode` 可选让位方式:`both`(默认,变浅+缩小)/`fade`(只变浅)/`shrink`(只缩小),一般不用填。编排时给每张证据/论点卡都填:值 = 下一个话题开始的秒数。这是"组合感"的关键——旧信息在场但让位,观众随时能回看已讲过的论据。
 
-## 卡片库(20 种,只能用这些 kind)
+## 卡片库(28 种,只能用这些 kind)
 
 <!-- CARDS:AUTO-BEGIN 由 `npm run sync:cards` 从 registry.ts 生成。
      新增卡片后跑一次,表里会自动多一行;「触发条件」列写着「⬜ 待补」的需要人工补一句。
@@ -141,6 +141,7 @@ description: 特效生成——当用户提供 SRT 字幕文件(或带时间戳�
 | kind | 用途 | 触发条件 | 关键 params |
 |---|---|---|---|
 | `stat-proof` | 数字实证,巨号滚动计数 | 里程碑/成绩/金额:"三万粉达成" | `kicker`(EN等宽)、`kickerZh`、`value`、`prefix`/`suffix`、`footEn`/`footZh`、`countMs`(卡点)、`position` |
+| `source-cite` | 来源卡 · 紧凑的引用/出处 chip 行 | 引用论文、报道、数据或他人观点,需要一句可信出处背书时 | `theme`(底色(此卡独立生效))、`position`(落位)、`type`(来源类型标签)、`source`(来源名称)、`date`(日期)、`note`(补充说明)、`accent`(强调色) |
 
 ### 数据指标(有具体数字时用,别拿它讲概念)
 | kind | 用途 | 触发条件 | 关键 params |
@@ -149,11 +150,14 @@ description: 特效生成——当用户提供 SRT 字幕文件(或带时间戳�
 | `odometer` | 翻牌计数器 | 单个整数的里程表滚轮 | `kicker`、`value`(整数)、`unit`、`label`、`position` |
 | `rank-bars` | 数据排名条 | 多项数据对比排名:"A 42%、B 21%" | `title`、`rows`(`名称,数值`用`\|`分隔)、`suffix`、`position`(left/right) |
 | `growth-curve` | 增长曲线:平滑曲线动画画出+渐变面积,峰值滚动计数 | "越攒越多/一路上涨"的复利叙事(粉丝数、资产库存、收入) | `kicker`/`kickerZh`、`points`(「标签 数值」`\|`分隔)、`unit`、`drawMs`(画完时长,卡点)、`caption`(数据口径)、`position` |
+| `key-number-stack` | 数字堆叠卡 · 2-3 个大数字短标签纵向叠放 | 一段里同时抛出 2-3 个核心指标,不需要排名对比时 | `theme`(底色(此卡独立生效))、`position`(落位)、`items`(数字行(数值 标签,/ 分隔,最多 3 行))、`prefix`(数字前缀(+/¥))、`suffix`(数字后缀(+/%))、`countMs`(计数时长(卡点用))、`accent`(强调色) |
 
 ### 对比取舍(两个东西对撞/否定一个立一个)
 | kind | 用途 | 触发条件 | 关键 params |
 |---|---|---|---|
 | `versus-card` | VS 对比卡 | 二选一对撞:"主动 vs 被动" | `aKicker`/`aTitle`/`aSub`、`bKicker`/`bTitle`/`bSub`、`winner`(a/b/none) |
+| `pros-cons` | 利弊卡 · 两列清单对比 | 分析「做 vs 不做」或「好处 vs 坏处」的取舍论述时 | `theme`(底色(此卡独立生效))、`position`(落位)、`prosTitle`(优点列标题)、`consTitle`(缺点列标题)、`pros`(优点(✓,/ 分隔,最多 5 条))、`cons`(缺点(✗,/ 分隔,最多 5 条))、`accent`(强调色) |
+| `before-after` | 前后对比卡 · 水平 before→after 转换 | 展示改变、成长、解决方案效果,强调「从 A 变成 B」时 | `theme`(底色(此卡独立生效))、`position`(落位)、`before`(变化前关键词)、`after`(变化后关键词)、`beforeLabel`(变化前标签)、`afterLabel`(变化后标签)、`wipeMs`(转换动画时长)、`accent`(强调色) |
 
 ### 金句观点(口播最常用,一句话一张)
 | kind | 用途 | 触发条件 | 关键 params |
@@ -166,12 +170,15 @@ description: 特效生成——当用户提供 SRT 字幕文件(或带时间戳�
 |---|---|---|---|
 | `step-timeline` | 竖排章节卡 | 本期章节/教程大纲 | `title`(`*关键词*`)、`steps`(`\|`分隔)、`revealed`(讲到第几章)、`position`(left/right) |
 | `checklist` | 步骤打勾 | 流程逐项完成 | `title`、`items`(`\|`分隔)、`checked`(已完成数)、`stepMs`(每项间隔,按SRT算)、`position`(left/right) |
+| `progress-steps` | 阶段进度卡 · 横向步骤追踪 | 需要展示流程当前走到哪一步、还剩几步时 | `theme`(底色(此卡独立生效))、`position`(落位)、`title`(标题)、`steps`(阶段(/ 分隔,最多 6 个))、`current`(当前阶段(1 开始))、`fillMs`(进度画满时长)、`accent`(强调色) |
+| `icon-grid` | 图标网格卡 · 2×2 或 3 列图标+标签并列 | 并列展示概念、工具、特征、能力项,需要整齐网格时 | `theme`(底色(此卡独立生效))、`position`(落位)、`title`(标题(可空))、`items`(项目(图标 标签,/ 分隔,最多 6 项))、`columns`(列数)、`stepMs`(每项弹入间隔)、`accent`(强调色) |
 
 ### 教程标注(讲界面、解释术语、给提示)
 | kind | 用途 | 触发条件 | 关键 params |
 |---|---|---|---|
 | `term-card` | 术语解释卡 | 出现术语要解释:Plan模式、MVP… | `en`(英文)、`term`、`def`(一句话定义)、`position`(left/right) |
 | `ui-callout` | 界面标注 | 讲解界面某区域:"项目入口在这里" | `label`、`ringW`/`ringH`(圈大小)、`side`、`offsetX`/`offsetY`(挪到目标位置) |
+| `callout-banner` | 横幅卡 · 贴顶/贴底通栏提示 | 章节切换、警示条、行动号召,需要一条横带贯穿画面时 | `theme`(底色(此卡独立生效))、`position`(落位)、`label`(横幅主文案)、`kicker`(左侧小标(可空))、`accent`(强调色) |
 
 ### 文字进场(纯文字的进场方式,内容轻时用)
 | kind | 用途 | 触发条件 | 关键 params |
@@ -193,6 +200,11 @@ description: 特效生成——当用户提供 SRT 字幕文件(或带时间戳�
 | kind | 用途 | 触发条件 | 关键 params |
 |---|---|---|---|
 | `terminal-3d` | 3D 终端打字机 | 讲命令行/代码执行过程;**模拟和 AI 的拉扯对话**("改→不对→再改→✗还是不对"逐字打出,痛点共鸣神器,可当人物背景板:剪映智能抠像把人叠回终端上层) | `file`(标题栏)、`lines`(`\|`分隔;`$`提示符/用户`-`参数 `"字符串"` `#`注释 `❯`执行 `✓`成功 `✗`失败红)、`cps`(按卡片时长算:总字数÷时长)、`position` |
+
+### 工具
+| kind | 用途 | 触发条件 | 关键 params |
+|---|---|---|---|
+| `countdown-or-timer` | 计时卡 · 倒计时或经过计时 | 限时挑战、紧迫感节拍、训练/专注时长等需要实时走时画面时 | `theme`(底色(此卡独立生效))、`position`(落位)、`mode`(模式)、`seconds`(起始秒数)、`kicker`(顶部小标)、`label`(底部说明)、`accent`(强调色) |
 <!-- CARDS:AUTO-END -->
 
 ## 示例(输入 → 输出)
