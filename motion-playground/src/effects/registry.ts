@@ -1,5 +1,4 @@
-/* 更新(git pull)会覆盖这个文件,不要直接改;要改请复制一份。
-   想调整动效卡,请改卡片组件本身,不要改这里。 */
+/* 更新(git pull)会覆盖这个文件,不要直接改;要改请复制一份。\n   想调整动效卡,请改卡片组件本身,不要改这里。 */
 import type { EffectDef } from "./types";
 import { quoteLockupDef } from "./QuoteLockup";
 import { stepTimelineDef } from "./hud/StepTimeline";
@@ -21,6 +20,14 @@ import { statProofDef } from "./hud/StatProof";
 import { growthCurveDef } from "./hud/GrowthCurve";
 import { entityChipsDef } from "./hud/EntityChips";
 import { pinBoardDef } from "./hud/PinBoard";
+import { calloutBannerDef } from "./hud/CalloutBanner";
+import { keyNumberStackDef } from "./hud/KeyNumberStack";
+import { prosConsDef } from "./hud/ProsCons";
+import { progressStepsDef } from "./hud/ProgressSteps";
+import { sourceCiteDef } from "./hud/SourceCite";
+import { iconGridDef } from "./hud/IconGrid";
+import { countdownOrTimerDef } from "./hud/CountdownOrTimer";
+import { beforeAfterDef } from "./hud/BeforeAfter";
 
 /** 按用途分组:同组内是"同一类需求的可选项",挑一张用即可 */
 export interface EffectGroup {
@@ -37,15 +44,15 @@ export const EFFECT_GROUPS: EffectGroup[] = [
   {
     /* 证据实证:观点用真素材/真数字背书,语义可视化的核心 */
     title: "证据实证",
-    effects: [statProofDef],
+    effects: [statProofDef, sourceCiteDef],
   },
   {
     title: "数据指标",
-    effects: [ringMetricDef, odometerDef, rankBarsDef, growthCurveDef],
+    effects: [ringMetricDef, odometerDef, rankBarsDef, growthCurveDef, keyNumberStackDef],
   },
   {
     title: "对比取舍",
-    effects: [versusCardDef],
+    effects: [versusCardDef, prosConsDef, beforeAfterDef],
   },
   {
     title: "金句观点",
@@ -53,11 +60,11 @@ export const EFFECT_GROUPS: EffectGroup[] = [
   },
   {
     title: "步骤流程",
-    effects: [stepTimelineDef, checklistDef],
+    effects: [stepTimelineDef, checklistDef, progressStepsDef, iconGridDef],
   },
   {
     title: "教程标注",
-    effects: [termCardDef, uiCalloutDef],
+    effects: [termCardDef, uiCalloutDef, calloutBannerDef],
   },
   {
     title: "文字进场",
@@ -75,6 +82,11 @@ export const EFFECT_GROUPS: EffectGroup[] = [
   {
     title: "场景 · B-roll",
     effects: [terminal3DDef],
+  },
+  {
+    /* 工具卡:计时、限制等 */
+    title: "工具",
+    effects: [countdownOrTimerDef],
   },
 ];
 
